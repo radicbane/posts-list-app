@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import Posts from './components/Posts'
+import Header from './components/Header'
+import { Link } from 'react-router-dom'
+import SearchParams from './components/SearchParams'
 
 function App() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const { data } = await axios.get(
+          'https://jsonplaceholder.typicode.com/posts'
+        )
+        setPosts(data)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetch()
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Link to="/">
+        <Header />
+      </Link>
+      <SearchParams posts={posts} />
+      <Posts />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

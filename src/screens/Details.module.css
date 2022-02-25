@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;1,400&family=Redressed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Nunito:ital,wght@0,300;1,400&family=Redressed&display=swap');
+
+.header {
+  font-family: 'Nunito', sans-serif;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
+
+.user {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  font-style: italic;
+  text-align: right;
+}
+
+.body {
+  text-align: center;
+  font-size: 20px;
+}

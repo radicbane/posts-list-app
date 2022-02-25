@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;1,400&family=Redressed&display=swap');
+
+.container {
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid blue;
+  border-radius: 10px;
+}
+
+.header {
+  font-family: 'Nunito', sans-serif;
+  font-size: 25px;
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.text {
+  font-size: 10px;
+  text-align: center;
+}
+
+.button {
+  border-radius: 5px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
