@@ -1,4 +1,15 @@
 .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+input {
+  padding: 10px;
+  margin: 20px;
+  border: 2px solid rgba(26, 23, 23, 0.521);
+  border-radius: 10px;
 }

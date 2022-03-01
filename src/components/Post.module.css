@@ -3,8 +3,13 @@
 .container {
   padding: 10px;
   margin: 20px;
-  border: 1px solid blue;
+  border: 2px solid rgba(26, 23, 23, 0.521);
   border-radius: 10px;
+  color: black;
+}
+
+p {
+  text-align: center;
 }
 
 .header {
@@ -14,11 +19,14 @@
   font-weight: bold;
   text-decoration: underline;
   text-align: center;
+  color: black;
 }
 
 .text {
-  font-size: 10px;
+  font-size: 20px;
   text-align: center;
+  text-decoration: none;
+  color: black;
 }
 
 .button {
@@ -28,4 +36,10 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.comments {
+  text-align: center;
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
 }

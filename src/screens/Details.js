@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import axios from 'axios'
+import { useParams } from 'react-router-dom'
 import BeatLoader from 'react-spinners/BeatLoader'
 import Comments from './Comments'
 import Detailsstyles from './Details.module.css'
 
 function Details() {
   const [post, setPost] = useState({})
+  const [users, setUsers] = useState({})
   const [user, setUser] = useState({})
-  const [users, setUsers] = useState([])
   const [comments, setComments] = useState([])
-  // const query = new URLSearchParams(useLocation().search)
-  // const id = query.get('id')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const params = useParams()
 
   useEffect(() => {
     setLoading(true)
@@ -20,45 +19,34 @@ function Details() {
   }, [])
 
   // useEffect(() => {
-  //   const fetch = async () => {
-  //     try {
-  //       const getPost = axios.get(
-  //         `https://jsonplaceholder.typicode.com/posts/${id}`
-  //       )
-  //       const getUsers = axios.get(`https://jsonplaceholder.typicode.com/users`)
-  //       const getComments = axios.get(
-  //         `https://jsonplaceholder.typicode.com/comments`
-  //       )
-  //       const responses = await axios.all([getPost, getUser, getComments])
-  //       setPost(responses[0].data)
-  //       // setUser(responses.data)
-  //       setComments(responses.data)
-  //     } catch (err) {
-  //       console.error(err)
-  //     }
+  //   const author = users.find((user) => post.userId === user.id)
+  //   if (!loading) {
+  //     setUser(author)
   //   }
-  //   fetch()
-  // }, [])
+  // }, [post.userId, users, loading])
 
-  const params = useParams()
-  useEffect(() => {
-    requestOptions()
-    getUser()
-    getComments()
-  }, [])
-
-  async function getUser() {
+  async function getUsers() {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
     const json = await response.json()
-    setUser(json[0])
+    setLoading(false)
+    setUsers(json[0]).catch((error) => {
+      setLoading(false)
+      setError(true)
+      console.log(error)
+    })
   }
 
-  async function requestOptions() {
+  async function getPost() {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/posts?id=${params.id}`
     )
     const json = await response.json()
-    setPost(json[0])
+    setLoading(false)
+    setPost(json[0]).catch((error) => {
+      setLoading(false)
+      setError(true)
+      console.log(error)
+    })
   }
 
   async function getComments() {
@@ -66,24 +54,34 @@ function Details() {
       `https://jsonplaceholder.typicode.com/posts/${params.id}/comments`
     )
     const json = await response.json()
-    setComments(json)
+    setLoading(false)
+    setComments(json).catch((error) => {
+      setLoading(false)
+      setError(true)
+      console.log(error)
+    })
   }
 
-  if (!loading) {
+  useEffect(() => {
+    getPost()
+    getUsers()
+    getComments()
+  }, [])
+
+  if (loading) {
     return <BeatLoader />
   }
-  if (loading) {
-    return (
-      <div>
-        <h1 className={Detailsstyles.header}>{post?.title}</h1>
-        <p className={Detailsstyles.body}>{post?.body}</p>
-        <h2 className={Detailsstyles.user}>{user?.name}</h2>
-        <p className={Detailsstyles.body}>
-          <Comments comments={comments} />
-        </p>
-      </div>
-    )
-  }
+  return (
+    <div>
+      {error && <div>Error fetching data.</div>}
+      <h1 className={Detailsstyles.header}>{post?.title}</h1>
+      <p className={Detailsstyles.body}>{post?.body}</p>
+      <h2 className={Detailsstyles.user}>{users?.name}</h2>
+      <p className={Detailsstyles.comments}>
+        <Comments comments={comments} />
+      </p>
+    </div>
+  )
 }
 
 export default Details

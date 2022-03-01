@@ -3,7 +3,7 @@ import axios from 'axios'
 import Posts from './components/Posts'
 import Header from './components/Header'
 import { Link } from 'react-router-dom'
-import SearchParams from './components/SearchParams'
+import './index.css'
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -22,12 +22,11 @@ function App() {
     fetch()
   }, [])
   return (
-    <div>
+    <div className="container">
       <Link to="/">
         <Header />
       </Link>
-      <SearchParams posts={posts} />
-      <Posts />
+      <Posts posts={posts} />
     </div>
   )
 }
