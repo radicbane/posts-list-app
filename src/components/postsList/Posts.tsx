@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import Post from './Post'
+import React, { useState, useEffect, FunctionComponent } from 'react'
+import axios from '../../../node_modules/axios/index'
+import Post from '../postList/Post'
 import Postsstyles from './Posts.module.css'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from '../../../node_modules/react-router-dom/index'
 
-function Posts() {
+const Posts: FunctionComponent = () => {
   const [posts, setPosts] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
-    fetch()
+    fetchPosts()
   }, [])
 
-  const fetch = async () => {
+  const fetchPosts = async () => {
     try {
       const { data } = await axios.get(
         'https://jsonplaceholder.typicode.com/posts'
@@ -47,6 +47,7 @@ function Posts() {
         })
         .map((post) => (
           <Post
+            key={post.id}
             id={post.id}
             title={post.title}
             body={post.body}

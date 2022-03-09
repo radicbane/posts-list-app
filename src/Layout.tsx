@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
-import Header from './components/Header'
+import Header from './components/headerList/Header'
 import Details from './screens/Details'
 
-const Layout = () => {
+const Layout: FunctionComponent = () => {
   return (
     <div>
       <Link to="/">

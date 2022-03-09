@@ -2,10 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from '../node_modules/react-router-dom/index'
 import Layout from './Layout'
 import Details from './screens/Details'
-import Posts from './components/Posts'
+import Posts from './components/postsList/Posts'
 
 ReactDOM.render(
   <React.StrictMode>
