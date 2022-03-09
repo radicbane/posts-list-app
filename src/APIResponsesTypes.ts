@@ -3,7 +3,7 @@ export interface PostProps {
   id?: number
   title?: string
   body?: string
-  posts: PostProps[]
+  posts?: PostProps[]
   post?: PostProps
 }
 
@@ -12,11 +12,11 @@ export interface CommentsProps {
   id?: number
   name?: string
   body?: string
-  comments: CommentsProps[]
+  comments?: CommentsProps[]
 }
 
 export interface UsersProps {
   id?: number
   name?: string
-  users: UsersProps[]
+  users?: UsersProps[]
 }

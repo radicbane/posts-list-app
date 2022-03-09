@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useFetch from '../hooks/useFetch'
 import { useParams } from 'react-router-dom'
+import { CommentsProps } from '../APIResponsesTypes'
 
 const Comments = () => {
-  const [comments, setComments] = useState([])
+  const [comments, setComments] = useState<CommentsProps[]>([])
   let params = useParams() as any
 
   let [commentsData, loading] = useFetch(

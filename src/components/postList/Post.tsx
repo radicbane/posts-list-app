@@ -1,27 +1,22 @@
 import Poststyles from './Post.module.css'
 import { Link } from 'react-router-dom'
 import React, { useEffect, useState, FunctionComponent } from 'react'
-import axios from '../../../node_modules/axios/index'
+import useFetch from '../../hooks/useFetch'
 import { PostProps } from '../../APIResponsesTypes'
 
 const Post: FunctionComponent<PostProps> = (posts) => {
   const [comments, setComments] = useState([])
   const [postComments, setPostComments] = useState([])
 
-  useEffect(() => {
-    fetchComments()
-  }, [])
+  let [commentsData] = useFetch(
+    `https://jsonplaceholder.typicode.com/comments`
+  ) as any
 
-  const fetchComments = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://jsonplaceholder.typicode.com/comments`
-      )
-      setComments(data)
-    } catch (err) {
-      console.error(err)
+  useEffect(() => {
+    if (commentsData.length > 0) {
+      setComments(commentsData)
     }
-  }
+  }, [commentsData])
 
   useEffect(() => {
     const commentPost = comments.filter(

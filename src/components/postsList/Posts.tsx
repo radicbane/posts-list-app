@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from 'react'
-import axios from '../../../node_modules/axios/index'
+import useFetch from '../../hooks/useFetch'
 import Post from '../postList/Post'
 import Postsstyles from './Posts.module.css'
 import { useSearchParams } from '../../../node_modules/react-router-dom/index'
@@ -8,20 +8,15 @@ const Posts: FunctionComponent = () => {
   const [posts, setPosts] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
 
-  useEffect(() => {
-    fetchPosts()
-  }, [])
+  let [postsData] = useFetch(
+    `https://jsonplaceholder.typicode.com/posts`
+  ) as any
 
-  const fetchPosts = async () => {
-    try {
-      const { data } = await axios.get(
-        'https://jsonplaceholder.typicode.com/posts'
-      )
-      setPosts(data)
-    } catch (err) {
-      console.error(err)
+  useEffect(() => {
+    if (postsData.length > 0) {
+      setPosts(postsData)
     }
-  }
+  }, [postsData])
 
   return (
     <div>

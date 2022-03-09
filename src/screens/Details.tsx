@@ -6,8 +6,8 @@ import useFetch from '../hooks/useFetch'
 import { PostProps, UsersProps } from '../APIResponsesTypes'
 
 const Details = () => {
-  const [post, setPost] = useState<PostProps>()
-  const [user, setUser] = useState<UsersProps>()
+  const [post, setPost] = useState<PostProps>({})
+  const [user, setUser] = useState<UsersProps>({})
 
   let params = useParams() as any
   let [postData, loading] = useFetch(
@@ -42,9 +42,9 @@ const Details = () => {
         <h1 className={Detailsstyles.header}>{post?.title}</h1>
         <p className={Detailsstyles.body}>{post?.body}</p>
         <h2 className={Detailsstyles.user}>{user?.name}</h2>
-        <p className={Detailsstyles.comments}>
+        <div className={Detailsstyles.comments}>
           <Comments />
-        </p>
+        </div>
       </div>
     )
   }
