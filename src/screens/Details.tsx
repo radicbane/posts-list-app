@@ -22,12 +22,13 @@ const Details = () => {
     if (!loading) {
       setPost(postData[0])
     }
-  }, [postData, usersData, loading])
+  }, [loading, postData])
 
   useEffect(() => {
-    const author = usersData.find((user) => user.id === post.userId)
-
-    if (!loading) {
+    if (usersData.length > 0) {
+      const author = usersData.find(
+        (user: UsersProps) => post.userId === user.id
+      )
       setUser(author)
     }
   }, [])
