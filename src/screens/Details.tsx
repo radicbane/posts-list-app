@@ -25,13 +25,11 @@ const Details = () => {
   }, [loading, postData])
 
   useEffect(() => {
+    const author = usersData.find((user: UsersProps) => post.userId === user.id)
     if (usersData.length > 0) {
-      const author = usersData.find(
-        (user: UsersProps) => post.userId === user.id
-      )
       setUser(author)
     }
-  }, [])
+  }, [post.userId, usersData])
 
   if (!post) {
     return <h1>...loading</h1>
